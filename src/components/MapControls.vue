@@ -5,14 +5,6 @@ import { inject, onMounted } from 'vue'
 import { Logo, Zoom, Fullscreen, MouseLocation, MapTheme } from '@antv/l7'
 onMounted(() => {
   const { scene } = inject('$scene_map')
-  // logo控件
-  const logo = new Logo({
-    // 图片 url
-    img: 'https://img.gejiba.com/images/dfdb6db1623eb881e724f58d9a366af8.png',
-    // 跳转地址
-    href: 'http://www.x-zd.com/',
-  })
-  scene.addControl(logo)
 
   // 缩放控件
   const zoom = new Zoom({
@@ -34,7 +26,7 @@ onMounted(() => {
     transform: (position) => {
       return position
     },
-    position: 'rightbottom',
+    position: 'leftbottom',
   })
   scene.addControl(mouseLocation)
 

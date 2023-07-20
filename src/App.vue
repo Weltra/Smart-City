@@ -11,4 +11,8 @@ import MapControls from './components/MapControls.vue'
 import Header from './components/Header.vue'
 </script>
 
-<style></style>
+<style>
+.mapboxgl-ctrl {
+  display: none !important;
+}
+</style>
