@@ -1,0 +1,31 @@
+{
+  "name": "smart-city",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "mock": "json-server -w mock/index.js -p 8080"
+  },
+  "dependencies": {
+    "@antv/g2": "^4.2.10",
+    "@antv/g2plot": "^2.4.31",
+    "@antv/l7": "^2.15.2",
+    "@antv/l7-draw": "^3.0.25",
+    "@antv/l7-maps": "^2.15.2",
+    "@babel/runtime": "^7.21.5",
+    "@opd/g2plot-vue": "^3.6.6",
+    "@turf/turf": "^6.5.0",
+    "axios": "^1.3.6",
+    "element-plus": "^2.3.5",
+    "json-server": "^0.17.3",
+    "mapbox-gl": "^2.14.1",
+    "mockjs": "^1.1.0",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "vite": "^4.3.9"
+  }
+}

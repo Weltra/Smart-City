@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  border: none;
+}
+table {
+  border-collapse: collapse;
+}
+html,
+body {
+  height: 100%;
+}
