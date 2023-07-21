@@ -19,6 +19,6 @@
   text-align: center;
   line-height: 40px;
   color: #fff;
-  z-index: 1;
+  z-index: 5;
 }
 </style>

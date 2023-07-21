@@ -5,7 +5,7 @@ export const useLeftBottom = () => {
     { type: '硚口区', value: 18 },
     { type: '江夏区', value: 15 },
     { type: '洪山区', value: 10 },
-    { type: '其他', value: 5 },
+    { type: '其他', value: 10 },
   ]
   const config = {
     appendPadding: 10,
@@ -17,7 +17,7 @@ export const useLeftBottom = () => {
       offset: -15,
     },
     interactions: [{ type: 'element-active' }],
-    height: 270,
+    height: 150,
   }
   return {
     data,

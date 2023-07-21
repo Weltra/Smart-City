@@ -25,7 +25,7 @@ export const useRightTop = () => {
     },
     interactions: [{ type: 'element-active' }],
     data,
-    height: 270,
+    height: 150,
     legend: {
       position: 'top',
       itemName: {
@@ -36,6 +36,6 @@ export const useRightTop = () => {
     },
   }
   return {
-    people_config: config,
+    config,
   }
 }

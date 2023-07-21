@@ -20,7 +20,7 @@ export default async () => {
     .color('rgba(242,246,250,1.0)')
     // 是否开启动画效果 在开启 animate 后默认会打开点亮窗户的动画
     .animate({
-      enable: false,
+      enable: true,
     })
     // 鼠标悬浮，元素高亮效果
     .active({

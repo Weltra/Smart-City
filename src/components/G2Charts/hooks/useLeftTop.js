@@ -45,7 +45,7 @@ export const useLeftTop = () => {
       }
     },
     legend: false,
-    height: 270,
+    height: 200,
   }
   return {
     config,
