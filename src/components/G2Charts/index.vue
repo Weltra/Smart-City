@@ -54,6 +54,9 @@
 import { ColumnChart, RoseChart, PieChart } from '@opd/g2plot-vue'
 // // 从自定义hooks中获取数据
 import { useLeftTop } from './hooks/useLeftTop.js'
+import { useLeftBottom } from './hooks/useLeftBottom.js'
+import { useRightTop } from './hooks/useRightTop.js'
+
 const { config: lt_config, data: lt_data } = useLeftTop()
 </script>
 
