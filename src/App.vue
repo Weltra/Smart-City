@@ -1,9 +1,9 @@
 <template>
-  <Header />
+  <Header></Header>
   <SmartCity />
   <MapControls />
-  <G2Charts />
-  <Footer />
+  <G2Charts v-show="showCharts" />
+  <Footer @toggleCharts="handleCharts"> </Footer>
 </template>
 
 <script setup>
