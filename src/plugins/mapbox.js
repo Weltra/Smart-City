@@ -21,7 +21,7 @@ export default {
       container: 'map',
       style: 'mapbox://styles/mapbox/dark-v11',
       center: [114.3, 30.5],
-      zoom: 12,
+      zoom: 2,
       projection: 'globe',
     })
     // 开启雾化

@@ -13,13 +13,21 @@
         </button>
         <p>控制中心</p>
       </div>
+      <div class="item">
+        <button class="toggle-btn" @click="flyTo">
+          <i class="iconfont icon-icon-test"></i>
+        </button>
+        <p>{{ flyMsg }}</p>
+      </div>
     </div>
   </footer>
 </template>
 
 <script setup>
 import useRotation from './hooks/useRotation'
+import useFly from './hooks/useFly'
 const { mark, handleRotation } = useRotation()
+const { flyTo, flyMsg } = useFly()
 
 let isShow = true
 const emits = defineEmits(['toggleCharts'])
