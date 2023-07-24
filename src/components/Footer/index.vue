@@ -19,11 +19,20 @@
         </button>
         <p>{{ flyMsg }}</p>
       </div>
+      <div class="item">
+        <DrawTool>
+          <button class="toggle-btn">
+            <i class="iconfont icon-paint"></i>
+          </button>
+        </DrawTool>
+        <p>事故查询</p>
+      </div>
     </div>
   </footer>
 </template>
 
 <script setup>
+import DrawTool from './DrawTools.vue'
 import useRotation from './hooks/useRotation'
 import useFly from './hooks/useFly'
 const { mark, handleRotation } = useRotation()
