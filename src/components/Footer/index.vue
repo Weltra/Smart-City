@@ -7,14 +7,26 @@
         </button>
         <p>{{ mark }}</p>
       </div>
+      <div class="item">
+        <button class="toggle-btn" @click="toggleCharts">
+          <i class="iconfont icon-supervision-full"></i>
+        </button>
+        <p>控制中心</p>
+      </div>
     </div>
   </footer>
 </template>
 
 <script setup>
 import useRotation from './hooks/useRotation'
-
 const { mark, handleRotation } = useRotation()
+
+let isShow = true
+const emits = defineEmits(['toggleCharts'])
+function toggleCharts() {
+  isShow = !isShow
+  emits('toggleCharts', isShow)
+}
 </script>
 
 <style>

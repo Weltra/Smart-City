@@ -13,6 +13,13 @@ import MapControls from './components/MapControls.vue'
 import Header from './components/Header.vue'
 import G2Charts from './components/G2Charts/index.vue'
 import Footer from './components/Footer/index.vue'
+
+import { ref } from 'vue'
+
+const showCharts = ref(true)
+function handleCharts(value) {
+  showCharts.value = value
+}
 </script>
 
 <style>
