@@ -21,9 +21,9 @@
 </template>
 
 <script setup>
-import useDraw from './hooks/useDraw.js'
+import { computed, inject, ref } from 'vue'
+import { DrawEvent, DrawPolygon, DrawCircle, DrawRect } from '@antv/l7-draw'
 
-import { ref, computed } from 'vue'
 // 绘制项，我们使用这个数组进行循环
 const tools = ref([
   'drawPolygonTool',
@@ -41,7 +41,37 @@ const computeClass = computed(() => (item) => {
   return res
 })
 
-const { queryEvents } = useDraw()
+// 定义查询绘制函数
+let draw = null
+const { scene } = inject('$scene_map')
+function queryEvents(type) {
+  if (draw) {
+    draw.disable()
+    draw.clear()
+  }
+  switch (type) {
+    case 'drawPolygonTool':
+      draw = new DrawPolygon(scene, {})
+      break
+    case 'drawRectTool':
+      draw = new DrawRect(scene, {})
+      break
+    case 'drawCircleTool':
+      draw = new DrawCircle(scene, {})
+      break
+    default:
+      draw = null
+      return
+  }
+  draw.enable()
+  draw.on(DrawEvent.Change, (allFeatures) => {
+    allFeatures.forEach((item, index) => {
+      if (index !== allFeatures.length - 1) {
+        draw.removeFeature(item)
+      }
+    })
+  })
+}
 </script>
 
 <style scoped>
