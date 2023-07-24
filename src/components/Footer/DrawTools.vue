@@ -11,12 +11,18 @@
     </template>
     <!-- 这里是popover中的内容 -->
     <div class="popover-w">
-      <i v-for="item in tools" :class="computeClass(item)"></i>
+      <i
+        v-for="item in tools"
+        :class="computeClass(item)"
+        @click="queryEvents(item)"
+      ></i>
     </div>
   </el-popover>
 </template>
 
 <script setup>
+import useDraw from './hooks/useDraw.js'
+
 import { ref, computed } from 'vue'
 // 绘制项，我们使用这个数组进行循环
 const tools = ref([
@@ -34,6 +40,8 @@ const computeClass = computed(() => (item) => {
   res[`icon-${item}`] = true
   return res
 })
+
+const { queryEvents } = useDraw()
 </script>
 
 <style scoped>
