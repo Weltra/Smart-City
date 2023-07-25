@@ -3,29 +3,35 @@
     <div class="btn-groups">
       <div class="item">
         <button class="toggle-btn" @click="handleRotation">
-          <i class="iconfont icon-fuwudiqiu"></i>
+          <i class="iconfont icon-earth"></i>
         </button>
         <p>{{ mark }}</p>
       </div>
       <div class="item">
         <button class="toggle-btn" @click="toggleCharts">
-          <i class="iconfont icon-supervision-full"></i>
+          <i class="iconfont icon-controlCenter"></i>
         </button>
         <p>控制中心</p>
       </div>
       <div class="item">
         <button class="toggle-btn" @click="flyTo">
-          <i class="iconfont icon-icon-test"></i>
+          <i class="iconfont icon-changeview"></i>
         </button>
         <p>{{ flyMsg }}</p>
       </div>
       <div class="item">
         <DrawTool>
           <button class="toggle-btn">
-            <i class="iconfont icon-paint"></i>
+            <i class="iconfont icon-mapquery"></i>
           </button>
         </DrawTool>
         <p>事故查询</p>
+      </div>
+      <div class="item">
+        <button class="toggle-btn">
+          <i class="iconfont icon-heatmap"></i>
+        </button>
+        <p>热力图分析</p>
       </div>
     </div>
   </footer>
@@ -48,6 +54,7 @@ function toggleCharts() {
 
 <style scoped>
 @import 'https://at.alicdn.com/t/c/font_4072822_j5r3vfaxh8h.css';
+@import 'https://at.alicdn.com/t/c/font_4182337_3r9mupuvjqm.css';
 
 .footer {
   position: fixed;

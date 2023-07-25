@@ -53,7 +53,7 @@
       </el-table>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogTableVisible = false">Cancel</el-button>
+          <el-button @click="dialogTableVisible = false">退出</el-button>
         </span>
       </template>
     </el-dialog>
@@ -116,7 +116,12 @@ function rowClick(row) {
 
   markLayer = new PointLayer({}).source(data)
   //在地图中添加动态点
-  markLayer.shape('radar').size(20).color('#f00').animate(true)
+  markLayer
+    .shape('circle')
+    .size(60)
+    .color('#f00')
+    .active({ color: '#00EE00' })
+    .animate({ enable: true, rings: 4 })
   scene.addLayer(markLayer)
   // 视角飞到事故点
   map.flyTo({
