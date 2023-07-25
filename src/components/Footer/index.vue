@@ -46,7 +46,7 @@ function toggleCharts() {
 }
 </script>
 
-<style>
+<style scoped>
 @import 'https://at.alicdn.com/t/c/font_4072822_j5r3vfaxh8h.css';
 
 .footer {

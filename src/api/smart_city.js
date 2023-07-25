@@ -1,16 +1,16 @@
 // 导入request
 import request from './request'
 
-export const getCityBuildings = () => {
+export const userRegister = () => {
   return request({
-    url: '/wuhan_buildings',
-    method: 'GET',
+    url: '/register/',
+    method: 'POST',
   })
 }
 
-export const getRoads = () => {
+export const getUsers = () => {
   return request({
-    url: '/wuhan_roads',
+    url: '/users/',
     method: 'GET',
   })
 }

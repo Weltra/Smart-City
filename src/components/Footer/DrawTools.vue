@@ -16,15 +16,20 @@
       ></i>
     </div>
   </el-popover>
+  <DisplayCard v-if=""></DisplayCard>
 </template>
 
 <script setup>
+import {DisplayCard} from './DisplayCard.vue'
 import { computed, inject, onMounted, ref } from 'vue'
 import { DrawEvent, DrawPolygon, DrawCircle, DrawRect } from '@antv/l7-draw'
 import { point, polygon, booleanPointInPolygon } from '@turf/turf'
 import { getEvents } from '@/api/smart_city.js'
+
+
 // 定义普通数据
 let eventsData = null
+let dataSource =null
 // 定义tools
 const tools = ref([
   'drawPolygonTool',
