@@ -20,16 +20,36 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog v-model="dialogTableVisible" title="事故详情">
-      <el-table :data="dialogTableData" type="expand">
-        <el-table-column property="event_num" label="编号" />
-        <el-table-column property="geometry.coordinates[0]" label="坐标经度" />
-        <el-table-column property="geometry.coordinates[1]" label="坐标纬度" />
-        <el-table-column property="name" label="事故类型" />
-        <el-table-column property="area" label="事故区域" />
-        <el-table-column property="car_num" label="车牌号" />
-        <el-table-column property="level" label="事故等级" />
-        <el-table-column property="phone" label="手机号" />
+    <el-dialog v-model="dialogTableVisible" title="事故详情" width="65%" border>
+      <el-table :data="dialogTableData">
+        <el-table-column property="event_num" label="编号" align="center" />
+        <el-table-column
+          property="geometry.coordinates[0]"
+          label="坐标经度"
+          width="120"
+          align="center"
+        />
+        <el-table-column
+          property="geometry.coordinates[1]"
+          label="坐标纬度"
+          width="120"
+          align="center"
+        />
+        <el-table-column property="name" label="事故类型" align="center" />
+        <el-table-column property="area" label="事故区域" align="center" />
+        <el-table-column
+          property="car_num"
+          label="车牌号"
+          width="120"
+          align="center"
+        />
+        <el-table-column property="level" label="事故等级" align="center" />
+        <el-table-column
+          property="phone"
+          label="手机号"
+          width="120"
+          align="center"
+        />
       </el-table>
       <template #footer>
         <span class="dialog-footer">
@@ -169,5 +189,9 @@ onBeforeUnmount(() => {
     .el-table.is-scrolling-none th.el-table-fixed-column--right
   ) {
   background-color: transparent;
+}
+
+:deep(.el-table .cell) {
+  white-space: nowrap;
 }
 </style>
