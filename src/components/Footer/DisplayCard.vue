@@ -1,33 +1,46 @@
 <template>
   <div class="display-card">
-    <el-table
-      :data="computedData"
-      size="small"
-      :max-height="400"
-      @row-click="rowClick"
-    >
-      <el-table-column prop="event_num" label="事件编号"></el-table-column>
-      <el-table-column prop="name" label="类型"></el-table-column>
-      <el-table-column label="操作" fixed="right" v-slot="scope">
-        <el-button
-          link
-          type="primary"
-          size="small"
-          @click="detailClick(scope.$index)"
-          >详情</el-button
-        >
-      </el-table-column>
-    </el-table>
-    <DisplayDialog
-      :dialogTableVisible="dialogTableVisible"
-      :tableData="computedData"
-      :clicknumber="rownumber"
-    ></DisplayDialog>
+    <div class="table-container">
+      <el-table
+        :data="computedData"
+        size="small"
+        :max-height="400"
+        @row-click="rowClick"
+      >
+        <el-table-column prop="event_num" label="事件编号"></el-table-column>
+        <el-table-column prop="name" label="类型"></el-table-column>
+        <el-table-column label="操作" fixed="right" v-slot="scope">
+          <el-button
+            link
+            type="primary"
+            size="small"
+            @click="detailClick(scope.$index)"
+            >详情</el-button
+          >
+        </el-table-column>
+      </el-table>
+    </div>
+    <el-dialog v-model="dialogTableVisible" title="事故详情">
+      <el-table :data="dialogTableData" type="expand">
+        <el-table-column property="event_num" label="编号" />
+        <el-table-column property="geometry.coordinates[0]" label="坐标经度" />
+        <el-table-column property="geometry.coordinates[1]" label="坐标纬度" />
+        <el-table-column property="name" label="事故类型" />
+        <el-table-column property="area" label="事故区域" />
+        <el-table-column property="car_num" label="车牌号" />
+        <el-table-column property="level" label="事故等级" />
+        <el-table-column property="phone" label="手机号" />
+      </el-table>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogTableVisible = false">Cancel</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
-import DisplayDialog from './DisplayDialog.vue'
 import { computed, inject, onBeforeUnmount } from 'vue'
 import { PointLayer } from '@antv/l7'
 import { ref } from 'vue'
@@ -36,7 +49,7 @@ const { scene, map } = inject('$scene_map')
 
 let markLayer = null
 let dialogTableVisible = ref(false)
-let rownumber = ref(0)
+let dialogTableData = ref(null)
 
 const props = defineProps({
   tableData: {
@@ -99,7 +112,8 @@ function rowClick(row) {
 }
 function detailClick(rownum) {
   dialogTableVisible.value = true
-  rownumber.value = rownum
+  dialogTableData.value = computedData.value.slice(rownum, rownum + 1)
+  console.log(dialogTableData)
 }
 onBeforeUnmount(() => {
   markLayer && scene.removeLayer(markLayer)
@@ -114,42 +128,46 @@ onBeforeUnmount(() => {
   border-radius: 4px;
   box-shadow: 0 0 5px 3px #333;
 }
-.eleCeil {
+:deep(.eleCeil) {
   background: transparent;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-:deep(.el-table) {
+.table-container:deep(.el-table) {
   background-color: transparent;
 }
 
-:deep(.el-table tr) {
+.table-container:deep(.el-table tr) {
   background-color: transparent;
   color: #fff;
   cursor: pointer;
 }
 
-:deep(.el-table tr:hover) {
+.table-container:deep(.el-table tr:hover) {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-:deep(.el-table--enable-row-transition .el-table__body td.el-table__cell) {
+.table-container:deep(
+    .el-table--enable-row-transition .el-table__body td.el-table__cell
+  ) {
   background-color: transparent;
 }
 
-:deep(.el-table th.el-table__cell) {
+.table-container:deep(.el-table th.el-table__cell) {
   background-color: transparent;
 }
 
-:deep(.el-table td.el-table__cell) {
+.table-container:deep(.el-table td.el-table__cell) {
   border-bottom: none;
 }
 
-:deep(.el-table__inner-wrapper::before) {
+.table-container:deep(.el-table__inner-wrapper::before) {
   height: 0;
 }
-:deep(.el-table.is-scrolling-none th.el-table-fixed-column--right) {
+.table-container:deep(
+    .el-table.is-scrolling-none th.el-table-fixed-column--right
+  ) {
   background-color: transparent;
 }
 </style>
