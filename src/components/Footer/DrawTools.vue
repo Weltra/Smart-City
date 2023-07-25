@@ -16,27 +16,26 @@
       ></i>
     </div>
   </el-popover>
-  <DisplayCard v-if=""></DisplayCard>
+  <DisplayCard v-if="showTable" :table-data="dataSource"></DisplayCard>
 </template>
 
 <script setup>
-import {DisplayCard} from './DisplayCard.vue'
+import DisplayCard from './DisplayCard.vue'
 import { computed, inject, onMounted, ref } from 'vue'
 import { DrawEvent, DrawPolygon, DrawCircle, DrawRect } from '@antv/l7-draw'
 import { point, polygon, booleanPointInPolygon } from '@turf/turf'
 import { getEvents } from '@/api/smart_city.js'
-
-
 // 定义普通数据
 let eventsData = null
-let dataSource =null
-// 定义tools
+// 定义响应式数据
 const tools = ref([
   'drawPolygonTool',
   'drawRectTool',
   'drawCircleTool',
   'delete',
 ])
+const dataSource = ref([])
+
 // 定义计算属性
 const computedClass = computed(() => {
   return (item) => {
@@ -47,6 +46,9 @@ const computedClass = computed(() => {
     res[`icon-${item}`] = true
     return res
   }
+})
+const showTable = computed(() => {
+  return dataSource.value.length > 0
 })
 // 在onMounted中获取事故数据
 onMounted(async () => {
@@ -73,7 +75,8 @@ function queryEvents(type) {
       draw = new DrawCircle(scene, {})
       break
     default:
-      draw = null
+      // 清空dataSource
+      dataSource.value = []
       return
   }
   draw.enable()
@@ -102,7 +105,7 @@ function queryEvents(type) {
           return isInArea
         }
       })
-      console.log(resData)
+      dataSource.value = resData
     }
   })
 }

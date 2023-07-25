@@ -1,23 +1,155 @@
 <template>
-  <div>
-    <el-table :data="tableData">
-      <el-table-cloumn prop="event_num"></el-table-cloumn>
-      <el-table-cloumn prop="name" label="类型"></el-table-cloumn>
-      <el-table-cloumn label="操作">
-        <el-button size="small">详情</el-button>
-      </el-table-cloumn>
+  <div class="display-card">
+    <el-table
+      :data="computedData"
+      size="small"
+      :max-height="400"
+      @row-click="rowClick"
+    >
+      <el-table-column prop="event_num" label="事件编号"></el-table-column>
+      <el-table-column prop="name" label="类型"></el-table-column>
+      <el-table-column label="操作" fixed="right" v-slot="scope">
+        <el-button
+          link
+          type="primary"
+          size="small"
+          @click="detailClick(scope.$index)"
+          >详情</el-button
+        >
+      </el-table-column>
     </el-table>
+    <DisplayDialog
+      :dialogTableVisible="dialogTableVisible"
+      :tableData="computedData"
+      :clicknumber="rownumber"
+    ></DisplayDialog>
   </div>
 </template>
 
 <script setup>
+import DisplayDialog from './DisplayDialog.vue'
+import { computed, inject, onBeforeUnmount } from 'vue'
+import { PointLayer } from '@antv/l7'
+import { ref } from 'vue'
+
+const { scene, map } = inject('$scene_map')
+
+let markLayer = null
+let dialogTableVisible = ref(false)
+let rownumber = ref(0)
+
 const props = defineProps({
   tableData: {
     type: Array,
   },
 })
+
+const computedData = computed(() => {
+  return props.tableData.map((row) => {
+    const {
+      geometry,
+      properties: { area, car_num, event_num, name, level, phone },
+    } = row
+    return {
+      geometry,
+      area,
+      car_num,
+      event_num,
+      name,
+      level,
+      phone,
+    }
+  })
+})
+
+function rowClick(row) {
+  markLayer && scene.removeLayer(markLayer)
+  // 添加动态点
+  const data = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: row.geometry.coordinates,
+        },
+        properties: {
+          name: 'marker',
+        },
+      },
+    ],
+  }
+
+  markLayer = new PointLayer({}).source(data)
+  //在地图中添加动态点
+  markLayer.shape('radar').size(20).color('#f00').animate(true)
+  scene.addLayer(markLayer)
+  // 视角飞到事故点
+  map.flyTo({
+    //飞行的中心点
+    center: row.geometry.coordinates,
+    //飞行之后地图的放大级别
+    zoom: 15,
+    //控制飞行的速度
+    speed: 0.4,
+    /* 俯仰角0-90 */
+    pitch: 30,
+  })
+}
+function detailClick(rownum) {
+  dialogTableVisible.value = true
+  rownumber.value = rownum
+}
+onBeforeUnmount(() => {
+  markLayer && scene.removeLayer(markLayer)
+})
 </script>
 
 <style scoped>
+.display-card {
+  position: fixed;
+  bottom: 80px;
+  background: #53697670;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 3px #333;
+}
+.eleCeil {
+  background: transparent;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
+:deep(.el-table) {
+  background-color: transparent;
+}
+
+:deep(.el-table tr) {
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+:deep(.el-table tr:hover) {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+:deep(.el-table--enable-row-transition .el-table__body td.el-table__cell) {
+  background-color: transparent;
+}
+
+:deep(.el-table th.el-table__cell) {
+  background-color: transparent;
+}
+
+:deep(.el-table td.el-table__cell) {
+  border-bottom: none;
+}
+
+:deep(.el-table__inner-wrapper::before) {
+  height: 0;
+}
+:deep(.el-table.is-scrolling-none th.el-table-fixed-column--right) {
+  background-color: transparent;
+}
 </style>
