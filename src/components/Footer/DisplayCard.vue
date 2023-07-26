@@ -20,43 +20,10 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog v-model="dialogTableVisible" title="事故详情" width="65%" border>
-      <el-table :data="dialogTableData">
-        <el-table-column property="event_num" label="编号" align="center" />
-        <el-table-column
-          property="geometry.coordinates[0]"
-          label="坐标经度"
-          width="120"
-          align="center"
-        />
-        <el-table-column
-          property="geometry.coordinates[1]"
-          label="坐标纬度"
-          width="120"
-          align="center"
-        />
-        <el-table-column property="name" label="事故类型" align="center" />
-        <el-table-column property="area" label="事故区域" align="center" />
-        <el-table-column
-          property="car_num"
-          label="车牌号"
-          width="120"
-          align="center"
-        />
-        <el-table-column property="level" label="事故等级" align="center" />
-        <el-table-column
-          property="phone"
-          label="手机号"
-          width="120"
-          align="center"
-        />
-      </el-table>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogTableVisible = false">退出</el-button>
-        </span>
-      </template>
-    </el-dialog>
+    <DisplayDialog
+      v-model:dialogTableData="dialogTableData"
+      v-model:dialogTableVisible="dialogTableVisible"
+    ></DisplayDialog>
   </div>
 </template>
 
@@ -64,6 +31,7 @@
 import { computed, inject, onBeforeUnmount } from 'vue'
 import { PointLayer } from '@antv/l7'
 import { ref } from 'vue'
+import DisplayDialog from './DisplayDialog.vue'
 
 const { scene, map } = inject('$scene_map')
 
@@ -140,6 +108,7 @@ function detailClick(rownum) {
   dialogTableVisible.value = true
   dialogTableData.value = computedData.value.slice(rownum, rownum + 1)
 }
+
 onBeforeUnmount(() => {
   markLayer && scene.removeLayer(markLayer)
 })
@@ -194,9 +163,5 @@ onBeforeUnmount(() => {
     .el-table.is-scrolling-none th.el-table-fixed-column--right
   ) {
   background-color: transparent;
-}
-
-:deep(.el-table .cell) {
-  white-space: nowrap;
 }
 </style>
