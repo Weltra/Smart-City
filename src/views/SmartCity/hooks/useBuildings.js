@@ -14,7 +14,7 @@ export default async () => {
   // 配置图层
   building_layer
     .source(building_data)
-    .size('floor', (h) => h * 3)
+    .size('floor', (h) => h * 4)
     .color('#f4d7ba')
     .animate({
       enable: true,
@@ -36,7 +36,7 @@ export default async () => {
       //   sweepCenter: [120.2, 30.25],
       // },
     })
-    .filter('floor', (h) => h >= 3)
+    .filter('floor', (h) => h >= 5)
 
   // 返回图层对象
   return building_layer

@@ -47,7 +47,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 const props = defineProps({
   dialogTableData: {
     type: Array,

@@ -9,18 +9,19 @@
       <div class="g2-chart">
         <div class="title">杭州市4A、5A级风景区数统计</div>
         <!-- 玫瑰图 -->
-        <RoseChart v-bind="lb_config" :data="lb_data" />
+        <!-- <RoseChart v-bind="lb_config" :data="lb_data" /> -->
+        <RoseChart></RoseChart>
       </div>
     </div>
     <div class="right-container">
       <div class="g2-chart">
-        <div class="title">武汉市人口统计</div>
+        <div class="title">杭州市客运量</div>
         <!-- 饼状图 -->
         <!-- <PieChart v-bind="rt_config" /> -->
         <PieChart></PieChart>
       </div>
       <div class="g2-chart">
-        <div class="title">七日天气预报</div>
+        <div class="title">七日天气情况</div>
         <LineChart></LineChart>
       </div>
     </div>
@@ -28,17 +29,14 @@
 </template>
 
 <script setup>
-import { ColumnChart, RoseChart } from '@opd/g2plot-vue'
+import { ColumnChart } from '@opd/g2plot-vue'
 // 从自定义hooks中获取数据
 import { useLeftTop } from './hooks/useLeftTop'
-import { useLeftBottom } from './hooks/useLeftBottom'
-import { useRightTop } from './hooks/useRightTop'
 import PieChart from '../ECharts/PieChart.vue'
 import LineChart from '../ECharts/LineChart.vue'
+import RoseChart from '../ECharts/RoseChart.vue'
 
 const { config: lt_config, data: lt_data } = useLeftTop()
-const { config: lb_config, data: lb_data } = useLeftBottom()
-const { config: rt_config } = useRightTop()
 </script>
 
 <style>

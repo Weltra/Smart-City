@@ -10,7 +10,7 @@ export const useLeftBottom = () => {
     { type: '淳安县', value: 3 },
   ]
   const config = {
-    appendPadding: 10,
+    appendPadding: 20,
     xField: 'type',
     yField: 'value',
     seriesField: 'type',
@@ -19,7 +19,7 @@ export const useLeftBottom = () => {
       offset: -15,
     },
     interactions: [{ type: 'element-active' }],
-    height: 150,
+    height: 180,
   }
   return {
     data,

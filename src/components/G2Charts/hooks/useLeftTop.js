@@ -1,11 +1,12 @@
 import { ref } from 'vue'
 export const useLeftTop = () => {
   const data = ref([
-    { type: '汉阳区', value: 10000 },
-    { type: '武昌区', value: 20000 },
-    { type: '洪山区', value: 50000 },
-    { type: '江夏区', value: 30000 },
-    { type: '江岸区', value: 35000 },
+    { type: '上城区', value: 10000 },
+    { type: '拱墅区', value: 20000 },
+    { type: '西湖区', value: 50000 },
+    { type: '滨江区', value: 30000 },
+    { type: '萧山区', value: 35000 },
+    { type: '余杭区', value: 25000 },
   ])
   // 模拟动态增长
   setInterval(() => {
@@ -46,6 +47,7 @@ export const useLeftTop = () => {
     },
     legend: false,
     height: 200,
+    width: 250,
   }
   return {
     config,

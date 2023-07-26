@@ -7,7 +7,6 @@ import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { LineChart } from 'echarts/charts'
 import {
-  TitleComponent,
   TooltipComponent,
   GridComponent,
   LegendComponent,
@@ -65,7 +64,7 @@ const option = ref({
       data: [34, 31, 31, 32, 35, 35, 33],
       lineStyle: {
         //lineStyle里面写y轴那一条线的样式
-        width: 3, //轴线的粗细 我写的是2 最小为0，值为0的时候线隐藏
+        width: 2, //轴线的粗细 我写的是2 最小为0，值为0的时候线隐藏
       },
       markPoint: {
         symbolSize: 40,
@@ -85,7 +84,7 @@ const option = ref({
       data: [26, 26, 24, 25, 27, 26, 25],
       lineStyle: {
         //lineStyle里面写y轴那一条线的样式
-        width: 3, //轴线的粗细 我写的是2 最小为0，值为0的时候线隐藏
+        width: 2, //轴线的粗细 我写的是2 最小为0，值为0的时候线隐藏
       },
       markPoint: {
         symbolSize: 40,
