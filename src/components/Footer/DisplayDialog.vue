@@ -1,13 +1,13 @@
 <template>
   <div class="display-dialog">
     <el-dialog
-      v-model="props.dialogTableVisible"
+      :model-value="dialogTableVisible"
       :before-close="CloseClick"
       title="事故详情"
       width="65%"
       border
     >
-      <el-table :data="props.dialogTableData">
+      <el-table :data="dialogTableData">
         <el-table-column property="event_num" label="编号" align="center" />
         <el-table-column
           property="geometry.coordinates[0]"
@@ -47,6 +47,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 const props = defineProps({
   dialogTableData: {
     type: Array,
@@ -55,7 +56,9 @@ const props = defineProps({
     type: Boolean,
   },
 })
+
 const emit = defineEmits(['update:dialogTableVisible'])
+
 function CloseClick() {
   emit('update:dialogTableVisible', false)
 }
