@@ -33,6 +33,12 @@
         </button>
         <p>热力图分析</p>
       </div>
+      <div class="item">
+        <button class="toggle-btn" @click="addModel">
+          <i class="iconfont icon-model_3d"></i>
+        </button>
+        <p>查看3D模型</p>
+      </div>
     </div>
   </footer>
 </template>
@@ -41,11 +47,37 @@
 import DrawTool from './DrawTools.vue'
 import useRotation from './hooks/useRotation'
 import useFly from './hooks/useFly'
+import modelLoadHelper from '@/utils/loadObjModels'
+import { inject } from 'vue'
 const { mark, handleRotation } = useRotation()
 const { flyTo, flyMsg } = useFly()
-
+const { map } = inject('$scene_map')
 let isShow = true
 const emits = defineEmits(['toggleCharts'])
+
+const modelLoadOpt = {
+  center: [114.355923, 30.472223],
+  angle: 0,
+  scale: {
+    x: 100,
+    y: 100,
+    z: 50,
+  },
+  objUrl: '/src/assets/models/model2/LeosVillage.obj',
+  mtlUrl: '/src/assets/models/model2/LeosVillage.mtl',
+}
+
+const loader = new modelLoadHelper(map, modelLoadOpt)
+
+const removeModel = () => {
+  console.log(layer)
+  layer && loader && loader.removeModel(layer.id)
+}
+
+const addModel = () => {
+  loader && loader.addModel()
+}
+
 function toggleCharts() {
   isShow = !isShow
   emits('toggleCharts', isShow)
@@ -54,7 +86,7 @@ function toggleCharts() {
 
 <style scoped>
 @import 'https://at.alicdn.com/t/c/font_4072822_j5r3vfaxh8h.css';
-@import 'https://at.alicdn.com/t/c/font_4182337_3r9mupuvjqm.css';
+@import 'https://at.alicdn.com/t/c/font_4182337_uqta2xodh9l.css';
 
 .footer {
   position: fixed;

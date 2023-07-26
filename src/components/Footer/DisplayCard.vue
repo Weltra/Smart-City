@@ -135,10 +135,10 @@ function rowClick(row) {
     pitch: 30,
   })
 }
+
 function detailClick(rownum) {
   dialogTableVisible.value = true
   dialogTableData.value = computedData.value.slice(rownum, rownum + 1)
-  console.log(dialogTableData)
 }
 onBeforeUnmount(() => {
   markLayer && scene.removeLayer(markLayer)
