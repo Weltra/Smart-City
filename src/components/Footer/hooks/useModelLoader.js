@@ -5,7 +5,7 @@ export default () => {
   const { map } = inject('$scene_map')
   const modelLoadOpt = {
     center: [120.197688, 30.158199],
-    angle: 0,
+    angle: 45,
     scale: {
       x: 6,
       y: 6,
