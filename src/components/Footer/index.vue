@@ -69,12 +69,19 @@ const modelLoadOpt = {
 
 const loader = new modelLoadHelper(map, modelLoadOpt)
 
-const removeModel = () => {
+const removeModel = (layer) => {
   console.log(layer)
   layer && loader && loader.removeModel(layer.id)
 }
 
 const addModel = () => {
+  let layers = map.getStyle().layers
+  for (let i = 0; i < layers.length; i++) {
+    console.log(layers[i])
+    if (layers[i] == '3d-model') {
+      removeModel(layers[i])
+    }
+  }
   loader && loader.addModel()
 }
 
