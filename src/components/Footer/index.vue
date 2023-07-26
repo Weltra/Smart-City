@@ -28,15 +28,15 @@
         <p>事故查询</p>
       </div>
       <div class="item">
-      <DisplayHeatMap
+        <DisplayHeatMap
           :visible="visible"
           :typeForm="typeForm"
           @changeVisable="changeShow"
         >
-        <button class="toggle-btn">
-          <i class="iconfont icon-heatmap"></i>
-        </button>
-                </DisplayHeatMap>
+          <button class="toggle-btn" @click="changeVisible">
+            <i class="iconfont icon-heatmap"></i>
+          </button>
+        </DisplayHeatMap>
         <p>热力图分析</p>
       </div>
       <div class="item">
