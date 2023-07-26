@@ -54,12 +54,13 @@ import DrawTool from './DrawTools.vue'
 import useRotation from './hooks/useRotation'
 import useFly from './hooks/useFly'
 import DisplayHeatMap from './DisplayHeatMap.vue'
+import { ref, inject, reactive } from 'vue'
+import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
+import modelLoadHelper from '@/utils/loadObjModels'
+
 const { mark, handleRotation } = useRotation()
 const { flyTo, flyMsg } = useFly()
-import { ref, inject, reactive, onMounted } from 'vue'
-import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
 const { scene, map } = inject('$scene_map')
-import modelLoadHelper from '@/utils/loadObjModels'
 
 // 设置pop显示
 const visible = ref(false)

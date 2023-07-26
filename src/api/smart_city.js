@@ -3,26 +3,19 @@ import request from './request'
 
 export const getCityBuildings = () => {
   return request({
-    url: '/wuhan_buildings',
+    url: '/hangzhou_buildings',
     method: 'GET',
   })
 }
 
 export const getRoads = () => {
   return request({
-    url: '/wuhan_roads',
+    url: '/hangzhou_roads',
     method: 'GET',
   })
 }
 
 export const getEvents = () => {
-  return request({
-    url: '/wuhan_events',
-    method: 'GET',
-  })
-}
-
-export const getHangzhouEvent = () => {
   return request({
     url: '/hangzhou_events',
     method: 'GET',
