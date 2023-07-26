@@ -1,11 +1,13 @@
 export const useLeftBottom = () => {
   const data = [
-    { type: '汉阳区', value: 27 },
-    { type: '武昌区', value: 25 },
-    { type: '硚口区', value: 18 },
-    { type: '江夏区', value: 15 },
-    { type: '洪山区', value: 10 },
-    { type: '其他', value: 10 },
+    { type: '余杭区', value: 7 },
+    { type: '西湖区', value: 6 },
+    { type: '萧山区', value: 5 },
+    { type: '上城区', value: 4 },
+    { type: '建德市', value: 4 },
+    { type: '临安区', value: 4 },
+    { type: '富阳区', value: 4 },
+    { type: '淳安县', value: 3 },
   ]
   const config = {
     appendPadding: 10,
