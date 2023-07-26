@@ -28,9 +28,15 @@
         <p>事故查询</p>
       </div>
       <div class="item">
+      <DisplayHeatMap
+          :visible="visible"
+          :typeForm="typeForm"
+          @changeVisable="changeShow"
+        >
         <button class="toggle-btn">
           <i class="iconfont icon-heatmap"></i>
         </button>
+                </DisplayHeatMap>
         <p>热力图分析</p>
       </div>
       <div class="item">
@@ -47,11 +53,56 @@
 import DrawTool from './DrawTools.vue'
 import useRotation from './hooks/useRotation'
 import useFly from './hooks/useFly'
-import modelLoadHelper from '@/utils/loadObjModels'
-import { inject } from 'vue'
+import DisplayHeatMap from './DisplayHeatMap.vue'
 const { mark, handleRotation } = useRotation()
 const { flyTo, flyMsg } = useFly()
-const { map } = inject('$scene_map')
+import { ref, inject, reactive, onMounted } from 'vue'
+import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
+const { scene, map } = inject('$scene_map')
+import modelLoadHelper from '@/utils/loadObjModels'
+
+// 设置pop显示
+const visible = ref(false)
+async function changeVisible() {
+  // 添加默认热力图
+  visible.value = !visible.value
+  map.flyTo({
+    center: [120.2, 30.25],
+    zoom: 10,
+    pitch: 0,
+  })
+  let heatmap = scene.getLayerByName('heatmap')
+  if (!heatmap) {
+    heatmap = await useHeatData(typeList.value[0], colorList.value[0])
+    scene.addLayer(heatmap)
+  }
+}
+
+async function changeShow() {
+  visible.value = !visible.value
+  let heatmap = scene.getLayerByName('heatmap')
+  // console.log(heatmap)
+  // 去除已有图层
+  if (heatmap !== undefined) {
+    scene.removeLayer(heatmap)
+    heatmap = await useHeatData(
+      typeList.value[typeForm.type],
+      colorList.value[typeForm.color]
+    )
+    scene.addLayer(heatmap)
+  }
+}
+
+const typeList = ref(['heatmap', 'heatmap3D'])
+const colorList = ref([
+  ['#2E8AE6', '#69D1AB', '#DAF291', '#FFD591', '#FF7A45', '#CF1D49'].reverse(),
+  ['#FF4818', '#F7B74A', '#FFF598', '#F27DEB', '#8C1EB2', '#421EB2'].reverse(),
+])
+
+const typeForm = reactive({
+  type: '',
+  color: '',
+})
 let isShow = true
 const emits = defineEmits(['toggleCharts'])
 
