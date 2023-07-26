@@ -6,6 +6,7 @@ import { inject, onMounted } from 'vue'
 import useBuildings from './hooks/useBuildings'
 import useRoads from './hooks/useRoads'
 
+
 onMounted(async () => {
   // 通过inject, 获取地图场景对象
   const { scene, map } = inject('$scene_map')

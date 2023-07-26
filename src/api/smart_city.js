@@ -21,3 +21,10 @@ export const getEvents = () => {
     method: 'GET',
   })
 }
+
+export const getHangzhouEvent = () => {
+  return request({
+    url: '/hangzhou_events',
+    method: 'GET',
+  })
+}
