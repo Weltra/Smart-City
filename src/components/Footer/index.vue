@@ -3,41 +3,47 @@
     <div class="btn-groups">
       <div class="item">
         <button class="toggle-btn" @click="handleRotation">
-          <i class="iconfont icon-fuwudiqiu"></i>
+          <i class="iconfont icon-earth"></i>
         </button>
         <p>{{ mark }}</p>
       </div>
       <div class="item">
         <button class="toggle-btn" @click="toggleCharts">
-          <i class="iconfont icon-supervision-full"></i>
+          <i class="iconfont icon-controlCenter"></i>
         </button>
         <p>控制中心</p>
       </div>
       <div class="item">
         <button class="toggle-btn" @click="flyTo">
-          <i class="iconfont icon-icon-test"></i>
+          <i class="iconfont icon-changeview"></i>
         </button>
         <p>{{ flyMsg }}</p>
       </div>
       <div class="item">
         <DrawTool>
           <button class="toggle-btn">
-            <i class="iconfont icon-paint"></i>
+            <i class="iconfont icon-mapquery"></i>
           </button>
         </DrawTool>
         <p>事故查询</p>
       </div>
       <div class="item">
-        <DisplayHeatMap
+      <DisplayHeatMap
           :visible="visible"
           :typeForm="typeForm"
           @changeVisable="changeShow"
         >
-          <button class="toggle-btn" @click="changeVisible">
-            <i class="iconfont icon-paint"></i>
-          </button>
-        </DisplayHeatMap>
-        <p>热力分析</p>
+        <button class="toggle-btn">
+          <i class="iconfont icon-heatmap"></i>
+        </button>
+                </DisplayHeatMap>
+        <p>热力图分析</p>
+      </div>
+      <div class="item">
+        <button class="toggle-btn" @click="addModel">
+          <i class="iconfont icon-model_3d"></i>
+        </button>
+        <p>查看3D模型</p>
       </div>
     </div>
   </footer>
@@ -53,6 +59,7 @@ const { flyTo, flyMsg } = useFly()
 import { ref, inject, reactive, onMounted } from 'vue'
 import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
 const { scene, map } = inject('$scene_map')
+import modelLoadHelper from '@/utils/loadObjModels'
 
 // 设置pop显示
 const visible = ref(false)
@@ -96,9 +103,39 @@ const typeForm = reactive({
   type: '',
   color: '',
 })
-
 let isShow = true
 const emits = defineEmits(['toggleCharts'])
+
+const modelLoadOpt = {
+  center: [114.355923, 30.472223],
+  angle: 0,
+  scale: {
+    x: 100,
+    y: 100,
+    z: 50,
+  },
+  objUrl: '/src/assets/models/model2/LeosVillage.obj',
+  mtlUrl: '/src/assets/models/model2/LeosVillage.mtl',
+}
+
+const loader = new modelLoadHelper(map, modelLoadOpt)
+
+const removeModel = (layer) => {
+  console.log(layer)
+  layer && loader && loader.removeModel(layer.id)
+}
+
+const addModel = () => {
+  let layers = map.getStyle().layers
+  for (let i = 0; i < layers.length; i++) {
+    console.log(layers[i])
+    if (layers[i] == '3d-model') {
+      removeModel(layers[i])
+    }
+  }
+  loader && loader.addModel()
+}
+
 function toggleCharts() {
   isShow = !isShow
   emits('toggleCharts', isShow)
@@ -107,6 +144,7 @@ function toggleCharts() {
 
 <style scoped>
 @import 'https://at.alicdn.com/t/c/font_4072822_j5r3vfaxh8h.css';
+@import 'https://at.alicdn.com/t/c/font_4182337_uqta2xodh9l.css';
 
 .footer {
   position: fixed;

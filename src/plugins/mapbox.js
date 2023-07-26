@@ -24,6 +24,7 @@ export default {
       zoom: 2,
       projection: 'globe',
     })
+
     // 开启雾化
     map.on('style.load', () => {
       map.setFog({})
@@ -37,7 +38,6 @@ export default {
       }),
       logoVisible: false,
     })
-
     // 使用provide, 添加到app应用实例上, 全局共享
     app.provide('$scene_map', { scene, map })
   },
