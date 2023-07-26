@@ -56,10 +56,11 @@ import useFly from './hooks/useFly'
 import DisplayHeatMap from './DisplayHeatMap.vue'
 import { ref, inject, reactive } from 'vue'
 import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
-import modelLoadHelper from '@/utils/loadObjModels'
+import useModelLoader from './hooks/useModelLoader'
 
 const { mark, handleRotation } = useRotation()
 const { flyTo, flyMsg } = useFly()
+const { removeModel, addModel } = useModelLoader()
 const { scene, map } = inject('$scene_map')
 
 // 设置pop显示
@@ -106,36 +107,6 @@ const typeForm = reactive({
 })
 let isShow = true
 const emits = defineEmits(['toggleCharts'])
-
-const modelLoadOpt = {
-  center: [114.355923, 30.472223],
-  angle: 0,
-  scale: {
-    x: 100,
-    y: 100,
-    z: 50,
-  },
-  objUrl: '/src/assets/models/model2/LeosVillage.obj',
-  mtlUrl: '/src/assets/models/model2/LeosVillage.mtl',
-}
-
-const loader = new modelLoadHelper(map, modelLoadOpt)
-
-const removeModel = (layer) => {
-  console.log(layer)
-  layer && loader && loader.removeModel(layer.id)
-}
-
-const addModel = () => {
-  let layers = map.getStyle().layers
-  for (let i = 0; i < layers.length; i++) {
-    console.log(layers[i])
-    if (layers[i] == '3d-model') {
-      removeModel(layers[i])
-    }
-  }
-  loader && loader.addModel()
-}
 
 function toggleCharts() {
   isShow = !isShow
