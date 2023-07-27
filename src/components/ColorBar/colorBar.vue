@@ -1,6 +1,7 @@
 <template>
-  <div id="colorBar" ref="colorBar">
-    {{ `色带${props.id}` }}
+  <div>
+    <div class="text">{{ `色带${props.id}:` }}</div>
+    <div id="colorBar" ref="colorBar"></div>
   </div>
 </template>
 <script setup>
@@ -28,7 +29,17 @@ onMounted(() => {
 })
 </script>
 <style scoped>
-:deep(.el-select-dropdown__item) {
-  margin-top: 2px;
+#colorBar {
+  border-radius: 3px;
+  height: 20px;
+  width: 110px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.text {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: 5px;
 }
 </style>
