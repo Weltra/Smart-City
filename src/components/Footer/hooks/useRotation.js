@@ -10,12 +10,12 @@ export default () => {
 
   function rotation() {
     const zoom = map.getZoom()
-    if (zoom < 5) {
+    if (zoom < 4) {
       let center = map.getCenter()
       center.lng += 10
       map.easeTo({
         center,
-        duration: 1000,
+        duration: 2000,
         easing: (n) => n,
       })
     }

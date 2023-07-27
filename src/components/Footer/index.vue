@@ -3,26 +3,26 @@
     <div class="btn-groups">
       <div class="item">
         <button class="toggle-btn" @click="handleRotation">
-          <i class="iconfont icon-fuwudiqiu"></i>
+          <i class="iconfont icon-earth"></i>
         </button>
         <p>{{ mark }}</p>
       </div>
       <div class="item">
         <button class="toggle-btn" @click="toggleCharts">
-          <i class="iconfont icon-supervision-full"></i>
+          <i class="iconfont icon-controlCenter"></i>
         </button>
         <p>控制中心</p>
       </div>
       <div class="item">
         <button class="toggle-btn" @click="flyTo">
-          <i class="iconfont icon-icon-test"></i>
+          <i class="iconfont icon-changeview"></i>
         </button>
         <p>{{ flyMsg }}</p>
       </div>
       <div class="item">
         <DrawTool>
           <button class="toggle-btn">
-            <i class="iconfont icon-paint"></i>
+            <i class="iconfont icon-mapquery"></i>
           </button>
         </DrawTool>
         <p>事故查询</p>
@@ -34,15 +34,22 @@
           @changeVisable="changeShow"
         >
           <button class="toggle-btn" @click="changeVisible">
-            <i class="iconfont icon-paint"></i>
+            <i class="iconfont icon-heatmap"></i>
           </button>
         </DisplayHeatMap> -->
         <router-link to="/home/heatMap">
           <button class="toggle-btn" @click="transHangZhou">
-            <i class="iconfont icon-paint"></i>
+            <i class="iconfont icon-heatmap"></i>
           </button>
         </router-link>
-        <p>热力分析</p>
+        </DisplayHeatMap>
+        <p>热力图分析</p>
+      </div>
+      <div class="item">
+        <button class="toggle-btn" @click="addModel">
+          <i class="iconfont icon-model_3d"></i>
+        </button>
+        <p>查看3D模型</p>
       </div>
     </div>
     <router-view></router-view>
@@ -54,10 +61,13 @@ import DrawTool from './DrawTools.vue'
 import useRotation from './hooks/useRotation'
 import useFly from './hooks/useFly'
 import DisplayHeatMap from './DisplayHeatMap.vue'
+import { ref, inject, reactive } from 'vue'
+import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
+import useModelLoader from './hooks/useModelLoader'
+
 const { mark, handleRotation } = useRotation()
 const { flyTo, flyMsg } = useFly()
-import { ref, inject, reactive, onMounted } from 'vue'
-import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
+const { removeModel, addModel } = useModelLoader()
 const { scene, map } = inject('$scene_map')
 
 // 飞行杭州并去除图表
@@ -113,9 +123,9 @@ const typeForm = reactive({
   type: '',
   color: '',
 })
-
 let isShow = true
 const emits = defineEmits(['toggleCharts'])
+
 function toggleCharts() {
   isShow = !isShow
   emits('toggleCharts', isShow)
@@ -124,6 +134,7 @@ function toggleCharts() {
 
 <style scoped>
 @import 'https://at.alicdn.com/t/c/font_4072822_j5r3vfaxh8h.css';
+@import 'https://at.alicdn.com/t/c/font_4182337_uqta2xodh9l.css';
 
 .footer {
   position: fixed;

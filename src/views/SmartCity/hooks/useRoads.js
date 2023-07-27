@@ -12,23 +12,15 @@ export default async () => {
     zIndex: 0,
     depth: true,
   })
-    // 添加道路数据
-    .source(roads_data)
-    // 设置道路宽度
-    .size(1)
-    .shape('line')
-    // 设置颜色
-    .color('#1990FF')
-    //设置道路流线的效果
+    .source(roads_data) // 加载数据源
+    .size(1) // 设置大小 (线宽)
+    .shape('line') // 设置形状
+    .color('#dfedfd') // 设置颜色
     .animate({
-      interval: 1, // 间隔
-      duration: 2, // 持续时间，延时
       trailLength: 2, // 流线长度
-    })
-    // 将过短的数据筛选掉
-    .filter('coordinates', (evt) => {
-      return evt.length > 20
-    })
+      duration: 2, // 持续时间
+      interval: 1, // 间隔周期
+    }) // 设置动画
 
   return roads_layer
 }
