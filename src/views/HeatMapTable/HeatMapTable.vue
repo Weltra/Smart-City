@@ -15,32 +15,36 @@
 <style scoped>
 .TableContainer {
   position: fixed;
-  background-color: #53697670;
+  background: linear-gradient(to bottom, #292e4968, #5369766a);
   color: #fff;
   top: 100px;
   left: 20px;
   width: 300px;
-  /* height: 200px; */
-  border-radius: 25px;
+  border-radius: 14px;
 }
 
 .TableContainer .tableHead {
   display: flex;
-  justify-content: space-around;
-  background-color: #efefef;
-  border-radius: 25px;
+  justify-content: space-between;
+  background-color: rgb(22, 46, 67);
+  border-radius: 14px;
 }
 .TableContainer .tableHead a {
   display: inline-block;
-  color: black;
+  color: #fff;
   text-decoration: none;
+  padding: 5px;
+  font-weight: bold;
+  width: 300px;
+  text-align: center;
 }
 
 .router-active {
-  background-color: #efefef;
+  background-color: #5a707dd1;
+  border-radius: 14px;
 }
 
-.tableContent { 
+.tableContent {
   padding-top: 10px;
 }
 </style>
