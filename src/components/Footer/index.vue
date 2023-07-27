@@ -42,7 +42,6 @@
             <i class="iconfont icon-heatmap"></i>
           </button>
         </router-link>
-        </DisplayHeatMap>
         <p>热力图分析</p>
       </div>
       <div class="item">
@@ -60,7 +59,6 @@
 import DrawTool from './DrawTools.vue'
 import useRotation from './hooks/useRotation'
 import useFly from './hooks/useFly'
-import DisplayHeatMap from './DisplayHeatMap.vue'
 import { ref, inject, reactive } from 'vue'
 import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
 import useModelLoader from './hooks/useModelLoader'
