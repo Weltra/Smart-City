@@ -7,61 +7,36 @@
         <ColumnChart v-bind="lt_config" :data="lt_data" />
       </div>
       <div class="g2-chart">
-        <div class="title">实时公交在线表</div>
+        <div class="title">杭州市4A、5A级风景区数统计</div>
         <!-- 玫瑰图 -->
-        <RoseChart v-bind="lb_config" :data="lb_data" />
+        <!-- <RoseChart v-bind="lb_config" :data="lb_data" /> -->
+        <RoseChart></RoseChart>
       </div>
     </div>
     <div class="right-container">
       <div class="g2-chart">
-        <div class="title">武汉市人口统计</div>
+        <div class="title">杭州市客运量指数</div>
         <!-- 饼状图 -->
-        <PieChart v-bind="rt_config" />
+        <!-- <PieChart v-bind="rt_config" /> -->
+        <PieChart></PieChart>
       </div>
-      <div class="g2-chart static">
-        <div class="title">武汉市三甲医院</div>
-        <div class="list">
-          <div>
-            <h4>医院 <span>30家</span></h4>
-            <img width="150px" src="../../assets/icons/hospital.png" />
-          </div>
-          <div>
-            <h4>门诊部 <span>300个</span></h4>
-            <img src="../../assets/icons/building.png" />
-          </div>
-          <div>
-            <h4>病床 <span>3000张</span></h4>
-            <img src="../../assets/icons/bed.png" />
-          </div>
-        </div>
-      </div>
-      <div class="g2-chart static">
-        <div class="title">高校学生统计</div>
-        <div class="list">
-          <div>
-            <h4>高校 <span>130所</span></h4>
-            <img src="../../assets/icons/school.png" alt="" />
-          </div>
-          <div>
-            <h4>在校大学生<span>100万</span></h4>
-            <img src="../../assets/icons/student.png" alt="" />
-          </div>
-        </div>
+      <div class="g2-chart">
+        <div class="title">七日天气情况</div>
+        <LineChart></LineChart>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ColumnChart, RoseChart, PieChart } from '@opd/g2plot-vue'
+import { ColumnChart } from '@opd/g2plot-vue'
 // 从自定义hooks中获取数据
 import { useLeftTop } from './hooks/useLeftTop'
-import { useLeftBottom } from './hooks/useLeftBottom'
-import { useRightTop } from './hooks/useRightTop'
+import PieChart from '../ECharts/PieChart.vue'
+import LineChart from '../ECharts/LineChart.vue'
+import RoseChart from '../ECharts/RoseChart.vue'
 
 const { config: lt_config, data: lt_data } = useLeftTop()
-const { config: lb_config, data: lb_data } = useLeftBottom()
-const { config: rt_config } = useRightTop()
 </script>
 
 <style>
@@ -110,6 +85,8 @@ const { config: rt_config } = useRightTop()
   margin-bottom: 20px;
   color: #fff;
   line-height: 46px;
+  font-size: 15px;
+  font-weight: bold;
   background: url('../../assets/images/chart-item.png') no-repeat;
 }
 .g2-chart .list {

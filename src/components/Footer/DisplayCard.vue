@@ -1,42 +1,43 @@
 <template>
   <div class="display-card">
-    <el-table
-      :data="computedData"
-      size="small"
-      :max-height="400"
-      @row-click="rowClick"
-    >
-      <el-table-column prop="event_num" label="事件编号"></el-table-column>
-      <el-table-column prop="name" label="类型"></el-table-column>
-      <el-table-column label="操作" fixed="right" v-slot="scope">
-        <el-button
-          link
-          type="primary"
-          size="small"
-          @click="detailClick(scope.$index)"
-          >详情</el-button
-        >
-      </el-table-column>
-    </el-table>
+    <div class="table-container">
+      <el-table
+        :data="computedData"
+        size="small"
+        :max-height="400"
+        @row-click="rowClick"
+      >
+        <el-table-column prop="event_num" label="事件编号"></el-table-column>
+        <el-table-column prop="name" label="类型"></el-table-column>
+        <el-table-column label="操作" fixed="right" v-slot="scope">
+          <el-button
+            link
+            type="primary"
+            size="small"
+            @click="detailClick(scope.$index)"
+            >详情</el-button
+          >
+        </el-table-column>
+      </el-table>
+    </div>
     <DisplayDialog
-      :dialogTableVisible="dialogTableVisible"
-      :tableData="computedData"
-      :clicknumber="rownumber"
+      v-model:dialogTableData="dialogTableData"
+      v-model:dialogTableVisible="dialogTableVisible"
     ></DisplayDialog>
   </div>
 </template>
 
 <script setup>
-import DisplayDialog from './DisplayDialog.vue'
 import { computed, inject, onBeforeUnmount } from 'vue'
 import { PointLayer } from '@antv/l7'
 import { ref } from 'vue'
+import DisplayDialog from './DisplayDialog.vue'
 
 const { scene, map } = inject('$scene_map')
 
 let markLayer = null
 let dialogTableVisible = ref(false)
-let rownumber = ref(0)
+let dialogTableData = ref(null)
 
 const props = defineProps({
   tableData: {
@@ -83,7 +84,12 @@ function rowClick(row) {
 
   markLayer = new PointLayer({}).source(data)
   //在地图中添加动态点
-  markLayer.shape('radar').size(20).color('#f00').animate(true)
+  markLayer
+    .shape('circle')
+    .size(60)
+    .color('#f00')
+    .active({ color: '#00EE00' })
+    .animate({ enable: true, rings: 4 })
   scene.addLayer(markLayer)
   // 视角飞到事故点
   map.flyTo({
@@ -97,10 +103,12 @@ function rowClick(row) {
     pitch: 30,
   })
 }
+
 function detailClick(rownum) {
   dialogTableVisible.value = true
-  rownumber.value = rownum
+  dialogTableData.value = computedData.value.slice(rownum, rownum + 1)
 }
+
 onBeforeUnmount(() => {
   markLayer && scene.removeLayer(markLayer)
 })
@@ -114,42 +122,46 @@ onBeforeUnmount(() => {
   border-radius: 4px;
   box-shadow: 0 0 5px 3px #333;
 }
-.eleCeil {
+:deep(.eleCeil) {
   background: transparent;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-:deep(.el-table) {
+.table-container:deep(.el-table) {
   background-color: transparent;
 }
 
-:deep(.el-table tr) {
+.table-container:deep(.el-table tr) {
   background-color: transparent;
   color: #fff;
   cursor: pointer;
 }
 
-:deep(.el-table tr:hover) {
+.table-container:deep(.el-table tr:hover) {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-:deep(.el-table--enable-row-transition .el-table__body td.el-table__cell) {
+.table-container:deep(
+    .el-table--enable-row-transition .el-table__body td.el-table__cell
+  ) {
   background-color: transparent;
 }
 
-:deep(.el-table th.el-table__cell) {
+.table-container:deep(.el-table th.el-table__cell) {
   background-color: transparent;
 }
 
-:deep(.el-table td.el-table__cell) {
+.table-container:deep(.el-table td.el-table__cell) {
   border-bottom: none;
 }
 
-:deep(.el-table__inner-wrapper::before) {
+.table-container:deep(.el-table__inner-wrapper::before) {
   height: 0;
 }
-:deep(.el-table.is-scrolling-none th.el-table-fixed-column--right) {
+.table-container:deep(
+    .el-table.is-scrolling-none th.el-table-fixed-column--right
+  ) {
   background-color: transparent;
 }
 </style>

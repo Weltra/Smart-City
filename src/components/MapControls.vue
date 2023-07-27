@@ -2,7 +2,7 @@
 
 <script setup>
 import { inject, onMounted } from 'vue'
-import { Logo, Zoom, Fullscreen, MouseLocation, MapTheme } from '@antv/l7'
+import { Zoom, Fullscreen, MouseLocation, MapTheme } from '@antv/l7'
 onMounted(() => {
   const { scene } = inject('$scene_map')
 
