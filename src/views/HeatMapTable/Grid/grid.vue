@@ -8,9 +8,20 @@
         </el-select>
       </el-form-item>
       <el-form-item label="色带样式">
-        <el-select v-model.lazy="fromData.color" placeholder="请输入" clearable>
-          <el-option label="色带1" :value="0" />
-          <el-option label="色带2" :value="1" />
+        <el-select
+          v-model.lazy="fromData.color"
+          placeholder="请输入"
+          ref="colorSelect"
+          clearable
+        >
+          <el-option
+            v-for="item in colorList"
+            :key="item.id"
+            :label="item.label"
+            :value="item.value"
+          >
+            <colorBar :list="item.list" :id="item.id"></colorBar>
+          </el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="像元密度">
@@ -45,6 +56,7 @@
   </div>
 </template>
 <script setup>
+import colorBar from '../../../components/ColorBar/colorBar.vue'
 import {
   computed,
   reactive,
@@ -61,7 +73,7 @@ import {
 // coverage:像元密度
 // colorList:色带列表 ！
 import useCsv from '../../SmartCity/hooks/useCsv'
-const { scene,map } = inject('$scene_map')
+const { scene, map } = inject('$scene_map')
 
 // 定义标签页中定义的图层类型
 const fromData = reactive({
@@ -75,10 +87,34 @@ const fromData = reactive({
 // 保存临时的渲染数据
 const tempSize = ref(fromData.size / 100)
 const tempCoverage = ref(fromData.coverage * 100)
-// 保存色带数据
+// 加载色带数组
 const colorList = ref([
-  ['#FF4818', '#F7B74A', '#FFF598', '#91EABC', '#2EA9A1', '#206C7C'].reverse(),
-  ['#FF4818', '#F7B74A', '#FFF598', '#F27DEB', '#8C1EB2', '#421EB2'].reverse(),
+  {
+    id: 1,
+    value: 0,
+    label: '色带一',
+    list: [
+      '#FF4818',
+      '#F7B74A',
+      '#FFF598',
+      '#91EABC',
+      '#2EA9A1',
+      '#206C7C',
+    ].reverse(),
+  },
+  {
+    id: 2,
+    value: 1,
+    label: '色带二',
+    list: [
+      '#FF4818',
+      '#F7B74A',
+      '#FFF598',
+      '#F27DEB',
+      '#8C1EB2',
+      '#421EB2',
+    ].reverse(),
+  },
 ])
 
 watch(fromData, async (newValue, oldValue) => {
@@ -91,7 +127,7 @@ watch(fromData, async (newValue, oldValue) => {
     newValue.size,
     newValue.shape,
     newValue.coverage,
-    colorList.value[newValue.color]
+    colorList.value[newValue.color].list
   )
   // 加载默认图层
   scene.addLayer(newLayer)
@@ -108,15 +144,15 @@ onMounted(async () => {
     fromData.size,
     fromData.shape,
     fromData.coverage,
-    colorList.value[fromData.color]
+    colorList.value[fromData.color].list
   )
   // 加载默认图层
   scene.addLayer(Layer)
   map.flyTo({
-      center: [118.7, 30.25],
-      zoom: 7,
-      pitch: 0,
-    })
+    center: [118.7, 30.25],
+    zoom: 7,
+    pitch: 0,
+  })
 })
 
 // 销毁时去除所有图层
