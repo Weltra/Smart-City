@@ -1,19 +1,18 @@
-# Nome do projeto
-
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
+# “智慧杭州”大屏管理系统
+<div align="center">
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Weltra/Smart-City?style=for-the-badge">
+<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Weltra/Smart-City?style=for-the-badge">
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/Weltra/Smart-City?style=for-the-badge">
+  <br/>
 <img alt="Static Badge" src="https://img.shields.io/badge/VUE-3.2.47-green?style=for-the-badge&logo=vue.js">
+  <img alt="Static Badge" src="https://img.shields.io/badge/echarts-5.4.3-red?style=for-the-badge&logo=apacheecharts">
+<img alt="Static Badge" src="https://img.shields.io/badge/three-0.154.0-16%2C%20162%2C%20110?style=for-the-badge&logo=Three.js">
+<img alt="Static Badge" src="https://img.shields.io/badge/mapbox--gl-2.14.1-%235cb3cc?style=for-the-badge&logo=mapbox">
+</div>
 
-<img alt="Static Badge" src="https://img.shields.io/badge/">
+> 使用AntV + Element-Plus + MapBox-GL + Echarts搭建的大屏系统
 
-
-<img src="imagem.png" alt="Exemplo imagem">
-
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
-
-### Ajustes e melhorias
+## 基本功能
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
