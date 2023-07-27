@@ -1,17 +1,19 @@
 # smart-city
 
-This template should help get you started developing with Vue 3 in Vite.
+杭州市智慧城市大屏项目
+![Static Badge](https://img.shields.io/badge/vue)
 
-## Recommended IDE Setup
+
+## 环境设置
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Customize configuration
+## 项目安装
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### 拉取项目
 
-## Project Setup
 
+前端
 ```sh
 npm install
 ```
