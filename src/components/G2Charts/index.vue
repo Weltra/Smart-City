@@ -15,7 +15,7 @@
     </div>
     <div class="right-container">
       <div class="g2-chart">
-        <div class="title">杭州市客运量</div>
+        <div class="title">杭州市客运量指数</div>
         <!-- 饼状图 -->
         <!-- <PieChart v-bind="rt_config" /> -->
         <PieChart></PieChart>
