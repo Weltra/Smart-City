@@ -8,19 +8,34 @@
         </el-select>
       </el-form-item>
       <el-form-item label="色带样式">
-        <el-select v-model.lazy="fromData.color" placeholder="请输入" clearable>
-          <!-- 自定标签样式，更换为色带 -->
-          <!-- <el-option
+        <!-- <el-option label="色带1" :value="0" />
+          <el-option label="色带2" :value="1" /> -->
+
+        <!-- el-select定义色带，考虑到渲染困难，选择其他组件-->
+        <el-select
+          v-model.lazy="fromData.color"
+          placeholder="请输入"
+          ref="colorSelect"
+          clearable
+        >
+          <el-option
             v-for="item in colorList"
             :key="item.id"
-            :list="item.list"
+            :label="item.label"
             :value="item.value"
           >
-            
-          </el-option> -->
-          <el-option label="色带1" :value="0" />
-          <el-option label="色带2" :value="1" />
+            <!-- @change="MountColorBar(val)" -->
+
+            <!-- colorBar组件 -->
+            <colorBar :list="item.list" :id="item.id"></colorBar>
+          </el-option>
         </el-select>
+
+        <!--自定义色带样式 -->
+        <!-- 
+          <span class="demonstration">测试</span>
+        <el-color-picker v-model="color2" /> 
+      -->
       </el-form-item>
       <el-form-item label="尺寸大小">
         <el-slider
@@ -44,14 +59,18 @@ import {
   watch,
   inject,
   onUnmounted,
+  resolveDirective,
 } from 'vue'
 import useHeatData from '../../SmartCity/hooks/useHeatData'
+import colorBar from '../../../components/ColorBar/colorBar.vue'
 const { scene, map } = inject('$scene_map')
+
 // 加载色带数组
 const colorList = ref([
   {
     id: 1,
     value: 0,
+    label: '色带一',
     list: [
       '#FF4818',
       '#F7B74A',
@@ -64,6 +83,7 @@ const colorList = ref([
   {
     id: 2,
     value: 1,
+    label: '色带二',
     list: [
       '#FF4818',
       '#F7B74A',
@@ -83,6 +103,16 @@ const fromData = reactive({
 })
 // 配置临时绑定
 const tempSize = ref(fromData.size)
+// ------------------------------------------------
+// 配置临时色带值
+const color2 = ref('#409EFF')
+// 配置选框颜色
+
+// 检测color变化
+watch(color2, (newValue, oldValue) => {
+  console.log(newValue)
+  console.log(newValue[1])
+})
 
 watch(fromData, async (newValue, oldValue) => {
   let oldLayer = scene.getLayerByName('heatmap')

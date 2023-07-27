@@ -62,11 +62,30 @@ import useFly from './hooks/useFly'
 import { ref, inject, reactive } from 'vue'
 import useHeatData from '@/views/SmartCity/hooks/useHeatData.js'
 import useModelLoader from './hooks/useModelLoader'
-
 const { mark, handleRotation } = useRotation()
 const { flyTo, flyMsg } = useFly()
 const { removeModel, addModel } = useModelLoader()
 const { scene, map } = inject('$scene_map')
+import { useRouter } from 'vue-router'
+
+//初始化路由
+const router = useRouter()
+// 设置pop显示
+const visible = ref(false)
+// 设置色带列表
+const typeList = ref(['heatmap', 'heatmap3D'])
+const colorList = ref([
+  ['#2E8AE6', '#69D1AB', '#DAF291', '#FFD591', '#FF7A45', '#CF1D49'].reverse(),
+  ['#FF4818', '#F7B74A', '#FFF598', '#F27DEB', '#8C1EB2', '#421EB2'].reverse(),
+])
+// 初始化表单数据
+const typeForm = reactive({
+  type: '',
+  color: '',
+})
+
+let isShow = ref(true)
+const emits = defineEmits(['toggleCharts'])
 
 // 飞行杭州并去除图表
 function transHangZhou() {
@@ -79,8 +98,6 @@ function transHangZhou() {
   })
 }
 
-// 设置pop显示
-const visible = ref(false)
 async function changeVisible() {
   // 添加默认热力图
   visible.value = !visible.value
@@ -110,6 +127,7 @@ async function changeShow() {
     scene.addLayer(heatmap)
   }
 }
+
 
 const typeList = ref(['heatmap', 'heatmap3D'])
 const colorList = ref([
