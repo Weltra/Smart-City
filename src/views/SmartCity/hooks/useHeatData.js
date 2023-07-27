@@ -4,16 +4,16 @@ import { getHangzhouEvent } from '@/api/smart_city.js'
 // 拟在event事件中添加times属性记录出现车祸的次数，用于渲染
 import { HeatmapLayer } from '@antv/l7'
 
-export default async (type, colors) => {
+export default async (name, type, colors, size) => {
   // 获取数据
   const heatData = await getHangzhouEvent()
   const heatMap = new HeatmapLayer({
-    name: 'heatmap',
+    name: name,
   })
     .source(heatData)
     .shape(type)
     // 不限制属性类型，均可传入
-    .size('times', [0, 2.0]) // weight映射通道
+    .size('times', [0, size]) // weight映射通道
     .style({
       intensity: 2,
       radius: 20,

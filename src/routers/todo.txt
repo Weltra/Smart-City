@@ -1,0 +1,9 @@
+1.配置router组件并设置url端口
+2.创建标签页，并进行注册
+3.设置home路由展示默认图像
+4.配置/home/heatmap子路由
+3.调节标签页样式
+
+app
+  SmartCity
+  MapControls

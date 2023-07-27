@@ -22,7 +22,8 @@
     "json-server": "^0.17.3",
     "mapbox-gl": "^2.14.1",
     "mockjs": "^1.1.0",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
