@@ -28,7 +28,7 @@
         <p>事故查询</p>
       </div>
       <div class="item">
-        <DisplayHeatMap
+        <!-- <DisplayHeatMap
           :visible="visible"
           :typeForm="typeForm"
           @changeVisable="changeShow"
@@ -36,6 +36,12 @@
           <button class="toggle-btn" @click="changeVisible">
             <i class="iconfont icon-heatmap"></i>
           </button>
+        </DisplayHeatMap> -->
+        <router-link to="/home/heatMap">
+          <button class="toggle-btn" @click="transHangZhou">
+            <i class="iconfont icon-heatmap"></i>
+          </button>
+        </router-link>
         </DisplayHeatMap>
         <p>热力图分析</p>
       </div>
@@ -46,6 +52,7 @@
         <p>查看3D模型</p>
       </div>
     </div>
+    <router-view></router-view>
   </footer>
 </template>
 
@@ -62,6 +69,17 @@ const { mark, handleRotation } = useRotation()
 const { flyTo, flyMsg } = useFly()
 const { removeModel, addModel } = useModelLoader()
 const { scene, map } = inject('$scene_map')
+
+// 飞行杭州并去除图表
+function transHangZhou() {
+  isShow = false
+  emits('toggleCharts', isShow)
+  map.flyTo({
+    center: [120.2, 30.25],
+    zoom: 10,
+    pitch: 0,
+  })
+}
 
 // 设置pop显示
 const visible = ref(false)

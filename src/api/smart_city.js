@@ -21,3 +21,10 @@ export const getEvents = () => {
     method: 'GET',
   })
 }
+
+export const getCsv = () => {
+  return request({
+    url: '/csv/locs.csv',
+    method: 'GET',
+  })
+}

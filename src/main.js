@@ -11,4 +11,7 @@ import App from './App.vue'
 // 注册插件
 import Mapbox from './plugins/mapbox.js'
 
-createApp(App).use(ElementPlus).use(Mapbox).mount('#app')
+// 注册路由
+import router from './routers/router'
+
+createApp(App).use(ElementPlus).use(Mapbox).use(router).mount('#app')
