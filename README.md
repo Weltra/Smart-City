@@ -16,51 +16,61 @@
 
 系统实现了如下基本功能:
 
-- [x] 
-- [x] 
-- [x] 
-- [ ] 
-- [ ] 
+- [x] 地球自转
+- [x] 控制中心
+- [x] 地图复位
+- [x] 事故查询
+- [x] 显示事件热力图
+- [x] 加载3D模型
 
-## 🚀 项目安装
-
-Para instalar o <nome_do_projeto>, siga estas etapas:
-
-Linux e macOS:
+## 🚀 项目使用
+### 拉取项目
+```sh
+git clone https://github.com/shaojintian/Best_README_template.git
 ```
-<comando_de_instalação>
+### Node.js包安装
+#### 前端部分
+在命令行输入以下代码，安装需要的包:
+```sh
+npm install 
+```
+#### 后端部分
+后端部分在[express](./express)文件夹中，进入后端部分:
+```sh
+cd express
+```
+在命令行输入以下代码，安装需要的Node.js包:
+```sh
+npm install 
+```
+### 项目启动
+#### 前端部分
+使用vite来实现工程化，在命令行输入以下代码，启动项目:
+```sh
+npm run dev
+```
+#### 后端部分
+进入后端部分:
+```sh
+cd express
+```
+启动后端express服务:
+```sh
+node index.js
 ```
 
-Windows:
-```
-<comando_de_instalação>
-```
+## 📫 参与开源项目
 
-## ☕ Usando <nome_do_projeto>
+贡献使开源社区成为一个学习、激励和创造的绝佳场所。你所作的任何贡献都是非常感谢的。
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
+3. Commit your Changes (git commit -m 'Add some AmazingFeature')
+4. Push to the Branch (git push origin feature/AmazingFeature)
+5. Open a Pull Request
 
-Para usar <nome_do_projeto>, siga estas etapas:
+## 🤝 贡献者
 
-```
-<exemplo_de_uso>
-```
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
-
-## 📫 Contribuindo para <nome_do_projeto>
-
-Para contribuir com <nome_do_projeto>, siga estas etapas:
-
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-
-## 🤝 Colaboradores
-
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
+为该项目做出贡献的开发者。
 
 <table>
   <tr>
@@ -83,10 +93,11 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   </tr>
 </table>
 
-## 😄 Seja um dos contribuidores
+## 😄 作者
 
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
+博客园：https://www.cnblogs.com/tangjielin/
 
-## 📝 Licença
+您也可以在贡献者名单中参看所有参与该项目的开发者。
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+## 📝 版权说明
+该项目签署了MIT 授权许可，详情请参阅 LICENSE
