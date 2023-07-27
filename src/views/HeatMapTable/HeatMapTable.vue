@@ -8,10 +8,19 @@
     </div>
     <div class="tableContent">
       <router-view></router-view>
+      <div class="close-btn">
+        <el-button @click="closeTable">关闭</el-button>
+      </div>
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useRouter, RouterView } from 'vue-router'
+const router = useRouter()
+function closeTable() {
+  router.replace('/')
+}
+</script>
 <style scoped>
 .TableContainer {
   position: fixed;
@@ -46,5 +55,34 @@
 
 .tableContent {
   padding-top: 10px;
+}
+
+.close-btn {
+  margin-left: 210px;
+  margin-bottom: 5px;
+}
+
+.TableContainer::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -2px;
+  width: 111px;
+  height: 35px;
+  background-image: url('../../assets/images/border.png');
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+.TableContainer::after {
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: -2px;
+  width: 111px;
+  height: 35px;
+  background-image: url('../../assets/images/border.png');
+  pointer-events: none;
 }
 </style>
