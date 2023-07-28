@@ -26,7 +26,7 @@
 ## 🚀 项目使用
 ### 拉取项目
 ```sh
-git clone https://github.com/shaojintian/Best_README_template.git
+git clone https://github.com/Weltra/Smart-City.git
 ```
 ### Node.js包安装
 #### 前端部分
